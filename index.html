@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadPilot AI - AI-Powered Lead Qualification for US Service Businesses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #f5f5f5;
+            --accent-color: #007bff;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(245, 245, 245, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+        }
+
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-color);
+            transform: translateX(-50%);
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .step.left {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .step.right {
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .step-content {
+            background: white;
+            color: var(--text-color);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            width: 45%;
+            margin: 0 20px;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Benefits */
+        .benefits {
+            background-color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-item {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #0056b3 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Contact */
+        .contact {
+            background-color: var(--secondary-color);
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                display: none; /* Simple mobile nav, could be improved */
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step.left, .step.right {
+                justify-content: center;
+            }
+
+            .step-content {
+                width: 100%;
+                margin: 20px 0;
+            }
+
+            .step-number {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">LeadPilot AI</div>
+            <ul>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Convert More Inquiries into Booked Calls</h1>
+            <p>LeadPilot AI uses advanced AI to qualify leads and automate follow-ups for US service businesses, ensuring no opportunity is missed.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get a Free Demo</a>
+                <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem" class="container">
+        <h2 class="section-title">The Challenges US Service Businesses Face</h2>
+        <div class="problem-grid">
+            <div class="problem-card fade-in">
+                <div class="problem-icon">📉</div>
+                <h3>Missed Leads</h3>
+                <p>Without timely responses, potential customers turn to competitors.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">⏰</div>
+                <h3>No Automated Follow-ups</h3>
+                <p>Manual processes lead to forgotten inquiries and lost revenue.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">📊</div>
+                <h3>Low Conversion Rates</h3>
+                <p>Inefficient lead handling results in fewer booked calls and sales.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How LeadPilot AI Works</h2>
+            <div class="timeline">
+                <div class="step left fade-in">
+                    <div class="step-content">
+                        <h3>Step 1: Instant AI Reply</h3>
+                        <p>Respond to new inquiries immediately with personalized AI-generated messages.</p>
+                    </div>
+                    <div class="step-number">1</div>
+                </div>
+                <div class="step right fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Step 2: Lead Qualification & Follow-ups</h3>
+                        <p>AI assesses lead quality and sends automated, targeted follow-up sequences.</p>
+                    </div>
+                </div>
+                <div class="step left fade-in">
+                    <div class="step-content">
+                        <h3>Step 3: Booked Calls via Calendar</h3>
+                        <p>Seamlessly schedule calls directly into your calendar for maximum efficiency.</p>
+                    </div>
+                    <div class="step-number">3</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2 class="section-title">Benefits for Your Business</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item fade-in">
+                    <div class="benefit-icon">📈</div>
+                    <h3>More Booked Calls</h3>
+                    <p>Increase conversion rates with qualified leads.</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <div class="benefit-icon">🤖</div>
+                    <h3>No Manual Follow-ups</h3>
+                    <p>Automate the process and save time.</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <div class="benefit-icon">🕒</div>
+                    <h3>Works 24/7</h3>
+                    <p>Capture leads anytime, anywhere.</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <div class="benefit-icon">🇺🇸</div>
+                    <h3>Built for US Service Businesses</h3>
+                    <p>Tailored to local market needs and regulations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Boost Your Conversions?</h2>
+            <p>Start with a free demo and see how LeadPilot AI can transform your lead management.</p>
+            <a href="#contact" class="btn btn-primary">Request Free Demo</a>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get Started Today</h2>
+            <form class="contact-form" action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="business">Business Name</label>
+                    <input type="text" id="business" name="business" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 LeadPilot AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth hover effects (already in CSS)
+    </script>
+</body>
+</html>
